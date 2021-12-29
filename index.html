@@ -196,7 +196,6 @@
 
     <script>
       const scriptURL = "https://script.google.com/macros/s/AKfycbxJlHwWk3VpJFEnwm5pC3teLK_LR0CgqPx3PyPDjU1_gfbbxLynutiEkxVenAyCrOStow/exec";
-
       const form = document.forms["wpu-contact-form"];
       const btnKirim = document.querySelector(".btn-kirim");
       const btnLoading = document.querySelector(".btn-loading");
@@ -216,7 +215,12 @@
         form.reset();
 
         fetch(scriptURL, { method: "POST", body: new FormData(form) })
-          .then((response) => console.log("Success!", response))
+          .then((response) => {
+            // tampilkan tombol kirim, hilangkan tombol loading
+            btnLoading.classList.toggle("d-none");
+            btnKirim.classList.toggle("d-none");
+            console.log("Success!", response);
+          })
           .catch((error) => console.error("Error!", error.message));
       });
     </script>
